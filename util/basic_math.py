@@ -16,7 +16,7 @@ def d_sigmoid(x):
     :param x: A scalar or numpy array
     :returns: the computed gradient
     """
-    s = d_sigmoid(x)    
+    s = d_sigmoid(x)
     ds = s * (1 - s)
     return ds
 
@@ -30,5 +30,18 @@ def normalize_rows(mat):
     mat_norm = np.linalg.norm(mat, ord_mat=2, axis=1, keepdims=True)
     mat_normalized = mat / mat_norm
     return mat_normalized
+
+
+def softmax(mat):
+    """
+    Calculates the softmax for each row of the input mat
+    :param mat: A numpy matrix of shape (m,n)
+    :returns: A numpy matrix equal to the softmax of mat, of shape (m,n)
+    """
+    mat_exp = np.exp(mat)
+    mat_sum = np.sum(mat_exp, axis=1, keepdims=True)
+    s = mat_exp/mat_sum
+    return s
+
 
 
