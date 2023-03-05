@@ -74,3 +74,7 @@ def L2(y, y_hat):
     :return: the loss between the real and expected outputs
     """
     return np.sum((y - y_hat) ** 2)
+
+
+def flatten(nd_array: np.ndarray):
+    return nd_array.reshape(nd_array.shape[0], -1).T
