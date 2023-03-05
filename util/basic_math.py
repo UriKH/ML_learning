@@ -44,4 +44,33 @@ def softmax(mat):
     return s
 
 
+def vectorize(x: np.ndarray):
+    """
+    Vectorize the N dimensional object into 1 dimensional row vector
+    :param x: the N dimensional numpy array
+    :return: the vectorization the object
+    """
+    size = 1
+    for i in x.shape:
+        size *= i
+    return x.reshape((1, size))
 
+
+def L1(y, y_hat):
+    """
+    Calculates the loss between two given outputs as the sum of the differences
+    :param y: the expected output
+    :param y_hat: real output
+    :return: the loss between the real and expected outputs
+    """
+    return np.sum(np.abs(y - y_hat))
+
+
+def L2(y, y_hat):
+    """
+    Calculates the loss between two given outputs as the sum of the squared differences
+    :param y: the expected output
+    :param y_hat: real output
+    :return: the loss between the real and expected outputs
+    """
+    return np.sum((y - y_hat) ** 2)
