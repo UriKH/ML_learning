@@ -2,11 +2,7 @@ import numpy as np
 import copy
 from lr_utils import load_dataset
 from util import basic_math as bm
-import matplotlib.pyplot as plt
-import h5py
-import scipy
-from PIL import Image
-from scipy import ndimage
+import testing
 
 
 def propagate(w, b, X, Y):
@@ -137,26 +133,6 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
     return d
 
 
-def plot_learning_curve(model):
-    costs = np.squeeze(model['costs'])
-    plt.plot(costs)
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per hundreds)')
-    plt.title(f"Learning rate = {str(model['learning_rate'])}")
-    plt.show()
-
-
-def test_image(file_name, model, classes, num_px):
-    image = np.array(Image.open(file_name).resize((num_px, num_px)))
-    plt.imshow(image)
-    image = image / 255.
-    image = image.reshape((1, num_px * num_px * 3)).T
-    my_predicted_image = predict(model["w"], model["b"], image)
-
-    print("y = " + str(np.squeeze(my_predicted_image)) + ", your algorithm predicts a \"" +
-          classes[int(np.squeeze(my_predicted_image)), ].decode("utf-8") + "\" picture.")
-
-
 def main():
     train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
     num_px = train_set_x_orig[0].shape[0]
@@ -168,8 +144,9 @@ def main():
 
     logistic_regression_model = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations=2000,
                                       learning_rate=0.005, print_cost=True)
-    plot_learning_curve(logistic_regression_model)
-    test_image('IMG_2652.JPEG', logistic_regression_model, classes, num_px)
+
+    testing.plot_learning_curve(logistic_regression_model)
+    testing.test_image('IMG_2652.JPEG', logistic_regression_model, classes, num_px)
 
 
 if __name__ == '__main__':
