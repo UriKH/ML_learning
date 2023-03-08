@@ -1,2 +1,2 @@
 # Deep learning coursera specialization
-My code and mini-projects in the deep learning specialization by DeepLearning.AI
+My code and mini-projects I created in the deep learning specialization courses by DeepLearning.AI.
